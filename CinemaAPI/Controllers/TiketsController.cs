@@ -21,6 +21,8 @@ namespace CinemaAPI.Controllers
             _tiketService = tiketService;
         }
 
+        /// <summary>Get All Tikets</summary>
+        /// <remarks>Mendapatkan seluruh Tiket yang pernah dipesan (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tiket>>> GetTikets()
@@ -33,6 +35,8 @@ namespace CinemaAPI.Controllers
                 .ToListAsync();
         }
 
+        /// <summary>Get Tiket by ID</summary>
+        /// <remarks>Mendapatkan detail Tiket berdasarkan ID (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Tiket>> GetTiket(int id)
@@ -52,6 +56,9 @@ namespace CinemaAPI.Controllers
             return tiket;
         }
 
+        /// <summary>Create Tiket</summary>
+        /// <remarks>Pesan Tiket Baru (Wajib Login)</remarks>
+        /// <param name="tiket">Kirimkan JadwalFilmId dan NomorKursi. UserId akan otomatis diambil dari Token Anda.</param>
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Tiket>> PostTiket(Tiket tiket)
@@ -62,6 +69,8 @@ namespace CinemaAPI.Controllers
             return CreatedAtAction(nameof(GetTiket), new { id = createdTiket.Id }, createdTiket);
         }
 
+        /// <summary>Update Tiket</summary>
+        /// <remarks>Mengubah status atau detail Tiket (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTiket(int id, Tiket tiket)
@@ -92,6 +101,8 @@ namespace CinemaAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>Delete Tiket</summary>
+        /// <remarks>Membatalkan/Menghapus Tiket berdasarkan ID (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTiket(int id)

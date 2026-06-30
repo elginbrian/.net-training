@@ -16,6 +16,8 @@ namespace CinemaAPI.Controllers
             _context = context;
         }
 
+        /// <summary>Get All Transaksi</summary>
+        /// <remarks>Mendapatkan seluruh daftar Transaksi pembayaran.</remarks>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transaksi>>> GetTransaksis()
         {
@@ -24,6 +26,8 @@ namespace CinemaAPI.Controllers
                 .ToListAsync();
         }
 
+        /// <summary>Get Transaksi by ID</summary>
+        /// <remarks>Mendapatkan detail Transaksi berdasarkan ID.</remarks>
         [HttpGet("{id}")]
         public async Task<ActionResult<Transaksi>> GetTransaksi(int id)
         {
@@ -39,6 +43,8 @@ namespace CinemaAPI.Controllers
             return transaksi;
         }
 
+        /// <summary>Create Transaksi</summary>
+        /// <remarks>Membuat Transaksi / Pembayaran baru untuk Tiket yang dipesan.</remarks>
         [HttpPost]
         public async Task<ActionResult<Transaksi>> PostTransaksi(Transaksi transaksi)
         {
@@ -48,6 +54,8 @@ namespace CinemaAPI.Controllers
             return CreatedAtAction(nameof(GetTransaksi), new { id = transaksi.Id }, transaksi);
         }
 
+        /// <summary>Update Transaksi</summary>
+        /// <remarks>Mengubah status Transaksi (Khusus Admin).</remarks>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTransaksi(int id, Transaksi transaksi)
         {
@@ -77,6 +85,8 @@ namespace CinemaAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>Delete Transaksi</summary>
+        /// <remarks>Menghapus Transaksi (Khusus Admin).</remarks>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTransaksi(int id)
         {

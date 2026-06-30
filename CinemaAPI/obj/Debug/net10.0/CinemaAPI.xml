@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CinemaAPI</name>
+    </assembly>
+    <members>
+        <member name="M:CinemaAPI.Controllers.AuthController.Login(CinemaAPI.Controllers.LoginRequest)">
+            <summary>User Login</summary>
+            <remarks>Login Pengguna (Mendapatkan Token JWT).</remarks>
+            <param name="request">Gunakan email "admin@cinema.com" dan password "admin123" untuk login sebagai Admin.</param>
+        </member>
+        <member name="M:CinemaAPI.Controllers.AuthController.Register(CinemaAPI.Controllers.LoginRequest)">
+            <summary>User Register</summary>
+            <remarks>Mendaftarkan Pengguna Baru.</remarks>
+            <param name="request">Data registrasi pengguna baru (Role default adalah User).</param>
+        </member>
+        <member name="M:CinemaAPI.Controllers.FilmsController.GetFilms">
+            <summary>Get All Films</summary>
+            <remarks>Mendapatkan daftar seluruh Film yang tersedia (Bisa diakses umum).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.FilmsController.GetFilm(System.Int32)">
+            <summary>Get Film by ID</summary>
+            <remarks>Mendapatkan detail Film berdasarkan ID (Bisa diakses umum).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.FilmsController.PostFilm(CinemaAPI.Models.Film)">
+            <summary>Create Film</summary>
+            <remarks>Menambahkan Film baru (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.FilmsController.PutFilm(System.Int32,CinemaAPI.Models.Film)">
+            <summary>Update Film</summary>
+            <remarks>Mengubah data Film yang sudah ada (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.FilmsController.DeleteFilm(System.Int32)">
+            <summary>Delete Film</summary>
+            <remarks>Menghapus Film berdasarkan ID (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.JadwalFilmsController.GetJadwalFilms">
+            <summary>Get All Jadwal Films</summary>
+            <remarks>Mendapatkan semua Jadwal Tayang Film beserta info Studio (Bisa diakses umum).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.JadwalFilmsController.GetJadwalFilm(System.Int32)">
+            <summary>Get Jadwal Film by ID</summary>
+            <remarks>Mendapatkan detail Jadwal Film berdasarkan ID (Bisa diakses umum).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.JadwalFilmsController.PostJadwalFilm(CinemaAPI.Models.JadwalFilm)">
+            <summary>Create Jadwal Film</summary>
+            <remarks>Menambahkan Jadwal Tayang baru (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.JadwalFilmsController.PutJadwalFilm(System.Int32,CinemaAPI.Models.JadwalFilm)">
+            <summary>Update Jadwal Film</summary>
+            <remarks>Mengubah Jadwal Tayang yang sudah ada (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.JadwalFilmsController.DeleteJadwalFilm(System.Int32)">
+            <summary>Delete Jadwal Film</summary>
+            <remarks>Menghapus Jadwal Tayang berdasarkan ID (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.StudiosController.GetStudios">
+            <summary>Get All Studios</summary>
+            <remarks>Mendapatkan daftar seluruh Studio (Bisa diakses umum).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.StudiosController.GetStudio(System.Int32)">
+            <summary>Get Studio by ID</summary>
+            <remarks>Mendapatkan detail Studio berdasarkan ID (Bisa diakses umum).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.StudiosController.PutStudio(System.Int32,CinemaAPI.Models.Studio)">
+            <summary>Update Studio</summary>
+            <remarks>Mengubah data Studio yang sudah ada (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.StudiosController.PostStudio(CinemaAPI.Models.Studio)">
+            <summary>Create Studio</summary>
+            <remarks>Menambahkan Studio baru (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.StudiosController.DeleteStudio(System.Int32)">
+            <summary>Delete Studio</summary>
+            <remarks>Menghapus Studio berdasarkan ID (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TiketsController.GetTikets">
+            <summary>Get All Tikets</summary>
+            <remarks>Mendapatkan seluruh Tiket yang pernah dipesan (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TiketsController.GetTiket(System.Int32)">
+            <summary>Get Tiket by ID</summary>
+            <remarks>Mendapatkan detail Tiket berdasarkan ID (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TiketsController.PostTiket(CinemaAPI.Models.Tiket)">
+            <summary>Create Tiket</summary>
+            <remarks>Pesan Tiket Baru (Wajib Login)</remarks>
+            <param name="tiket">Kirimkan JadwalFilmId dan NomorKursi. UserId akan otomatis diambil dari Token Anda.</param>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TiketsController.PutTiket(System.Int32,CinemaAPI.Models.Tiket)">
+            <summary>Update Tiket</summary>
+            <remarks>Mengubah status atau detail Tiket (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TiketsController.DeleteTiket(System.Int32)">
+            <summary>Delete Tiket</summary>
+            <remarks>Membatalkan/Menghapus Tiket berdasarkan ID (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TransaksisController.GetTransaksis">
+            <summary>Get All Transaksi</summary>
+            <remarks>Mendapatkan seluruh daftar Transaksi pembayaran.</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TransaksisController.GetTransaksi(System.Int32)">
+            <summary>Get Transaksi by ID</summary>
+            <remarks>Mendapatkan detail Transaksi berdasarkan ID.</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TransaksisController.PostTransaksi(CinemaAPI.Models.Transaksi)">
+            <summary>Create Transaksi</summary>
+            <remarks>Membuat Transaksi / Pembayaran baru untuk Tiket yang dipesan.</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TransaksisController.PutTransaksi(System.Int32,CinemaAPI.Models.Transaksi)">
+            <summary>Update Transaksi</summary>
+            <remarks>Mengubah status Transaksi (Khusus Admin).</remarks>
+        </member>
+        <member name="M:CinemaAPI.Controllers.TransaksisController.DeleteTransaksi(System.Int32)">
+            <summary>Delete Transaksi</summary>
+            <remarks>Menghapus Transaksi (Khusus Admin).</remarks>
+        </member>
+        <member name="T:CinemaAPI.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CinemaAPI.Migrations.AddNewTables">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddNewTables.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddNewTables.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddNewTables.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CinemaAPI.Migrations.AddSeedData">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddSeedData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddSeedData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddSeedData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CinemaAPI.Migrations.AddAuthTable">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddAuthTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddAuthTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddAuthTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CinemaAPI.Migrations.FixAuthSeed">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.FixAuthSeed.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.FixAuthSeed.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.FixAuthSeed.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CinemaAPI.Migrations.AddEmailField">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddEmailField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddEmailField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CinemaAPI.Migrations.AddEmailField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
+            <summary>
+            Generates a documentation comment ID for a type.
+            Example: T:Namespace.Outer+Inner`1 becomes T:Namespace.Outer.Inner`1
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.PropertyInfo)">
+            <summary>
+            Generates a documentation comment ID for a property.
+            Example: P:Namespace.ContainingType.PropertyName or for an indexer P:Namespace.ContainingType.Item(System.Int32)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type,System.String)">
+            <summary>
+            Generates a documentation comment ID for a property given its container type and property name.
+            Example: P:Namespace.ContainingType.PropertyName
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.MethodInfo)">
+            <summary>
+            Generates a documentation comment ID for a method (or constructor).
+            For example:
+              M:Namespace.ContainingType.MethodName(ParamType1,ParamType2)~ReturnType
+              M:Namespace.ContainingType.#ctor(ParamType)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.GetTypeDocId(System.Type,System.Boolean,System.Boolean)">
+            <summary>
+            Generates a documentation ID string for a type.
+            This method handles nested types (replacing '+' with '.'),
+            generic types, arrays, pointers, by-ref types, and generic parameters.
+            The <paramref name="includeGenericArguments"/> flag controls whether
+            constructed generic type arguments are emitted, while <paramref name="omitGenericArity"/>
+            controls whether the generic arity marker (e.g. "`1") is appended.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.NormalizeDocId(System.String)">
+            <summary>
+            Normalizes a documentation comment ID to match the compiler-style format.
+            Strips the return type suffix for ordinary methods but retains it for conversion operators.
+            </summary>
+            <param name="docId">The documentation comment ID to normalize.</param>
+            <returns>The normalized documentation comment ID.</returns>
+        </member>
+    </members>
+</doc>

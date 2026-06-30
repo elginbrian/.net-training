@@ -17,12 +17,16 @@ namespace CinemaAPI.Controllers
             _context = context;
         }
 
+        /// <summary>Get All Studios</summary>
+        /// <remarks>Mendapatkan daftar seluruh Studio (Bisa diakses umum).</remarks>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Studio>>> GetStudios()
         {
             return await _context.Studios.ToListAsync();
         }
 
+        /// <summary>Get Studio by ID</summary>
+        /// <remarks>Mendapatkan detail Studio berdasarkan ID (Bisa diakses umum).</remarks>
         [HttpGet("{id}")]
         public async Task<ActionResult<Studio>> GetStudio(int id)
         {
@@ -36,6 +40,8 @@ namespace CinemaAPI.Controllers
             return studio;
         }
 
+        /// <summary>Update Studio</summary>
+        /// <remarks>Mengubah data Studio yang sudah ada (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudio(int id, Studio studio)
@@ -66,6 +72,8 @@ namespace CinemaAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>Create Studio</summary>
+        /// <remarks>Menambahkan Studio baru (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Studio>> PostStudio(Studio studio)
@@ -76,6 +84,8 @@ namespace CinemaAPI.Controllers
             return CreatedAtAction(nameof(GetStudio), new { id = studio.Id }, studio);
         }
 
+        /// <summary>Delete Studio</summary>
+        /// <remarks>Menghapus Studio berdasarkan ID (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudio(int id)

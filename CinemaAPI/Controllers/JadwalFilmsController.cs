@@ -17,6 +17,8 @@ namespace CinemaAPI.Controllers
             _context = context;
         }
 
+        /// <summary>Get All Jadwal Films</summary>
+        /// <remarks>Mendapatkan semua Jadwal Tayang Film beserta info Studio (Bisa diakses umum).</remarks>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<JadwalFilm>>> GetJadwalFilms()
         {
@@ -26,6 +28,8 @@ namespace CinemaAPI.Controllers
                 .ToListAsync();
         }
 
+        /// <summary>Get Jadwal Film by ID</summary>
+        /// <remarks>Mendapatkan detail Jadwal Film berdasarkan ID (Bisa diakses umum).</remarks>
         [HttpGet("{id}")]
         public async Task<ActionResult<JadwalFilm>> GetJadwalFilm(int id)
         {
@@ -42,6 +46,8 @@ namespace CinemaAPI.Controllers
             return jadwalFilm;
         }
 
+        /// <summary>Create Jadwal Film</summary>
+        /// <remarks>Menambahkan Jadwal Tayang baru (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<JadwalFilm>> PostJadwalFilm(JadwalFilm jadwalFilm)
@@ -52,6 +58,8 @@ namespace CinemaAPI.Controllers
             return CreatedAtAction(nameof(GetJadwalFilm), new { id = jadwalFilm.Id }, jadwalFilm);
         }
 
+        /// <summary>Update Jadwal Film</summary>
+        /// <remarks>Mengubah Jadwal Tayang yang sudah ada (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutJadwalFilm(int id, JadwalFilm jadwalFilm)
@@ -82,6 +90,8 @@ namespace CinemaAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>Delete Jadwal Film</summary>
+        /// <remarks>Menghapus Jadwal Tayang berdasarkan ID (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJadwalFilm(int id)

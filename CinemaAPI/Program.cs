@@ -18,7 +18,19 @@ builder.Services.AddScoped<ITiketService, TiketService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer((document, context, cancellationToken) =>
+    {
+        document.Info = new()
+        {
+            Title = "Cinema API",
+            Version = "v1",
+            Description = "REST API untuk Sistem Manajemen Bioskop. Meliputi fitur Pemesanan Tiket, Jadwal, dan Master Data Studio & Film."
+        };
+        return Task.CompletedTask;
+    });
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

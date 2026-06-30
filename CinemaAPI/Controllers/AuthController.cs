@@ -14,6 +14,9 @@ namespace CinemaAPI.Controllers
             _authService = authService;
         }
 
+        /// <summary>User Login</summary>
+        /// <remarks>Login Pengguna (Mendapatkan Token JWT).</remarks>
+        /// <param name="request">Gunakan email "admin@cinema.com" dan password "admin123" untuk login sebagai Admin.</param>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
@@ -21,6 +24,9 @@ namespace CinemaAPI.Controllers
             return Ok(new { Token = result.Token, Role = result.Role });
         }
 
+        /// <summary>User Register</summary>
+        /// <remarks>Mendaftarkan Pengguna Baru.</remarks>
+        /// <param name="request">Data registrasi pengguna baru (Role default adalah User).</param>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] LoginRequest request)
         {

@@ -18,12 +18,16 @@ namespace CinemaAPI.Controllers
             _context = context;
         }
 
+        /// <summary>Get All Films</summary>
+        /// <remarks>Mendapatkan daftar seluruh Film yang tersedia (Bisa diakses umum).</remarks>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Film>>> GetFilms()
         {
             return await _context.Films.ToListAsync();
         }
 
+        /// <summary>Get Film by ID</summary>
+        /// <remarks>Mendapatkan detail Film berdasarkan ID (Bisa diakses umum).</remarks>
         [HttpGet("{id}")]
         public async Task<ActionResult<Film>> GetFilm(int id)
         {
@@ -37,6 +41,8 @@ namespace CinemaAPI.Controllers
             return film;
         }
 
+        /// <summary>Create Film</summary>
+        /// <remarks>Menambahkan Film baru (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Film>> PostFilm(Film film)
@@ -46,6 +52,8 @@ namespace CinemaAPI.Controllers
             return CreatedAtAction(nameof(GetFilm), new { id = film.Id }, film);
         }
 
+        /// <summary>Update Film</summary>
+        /// <remarks>Mengubah data Film yang sudah ada (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFilm(int id, Film film)
@@ -76,6 +84,8 @@ namespace CinemaAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>Delete Film</summary>
+        /// <remarks>Menghapus Film berdasarkan ID (Khusus Admin).</remarks>
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFilm(int id)
