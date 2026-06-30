@@ -1,4 +1,5 @@
 using CinemaAPI.Data;
+using Microsoft.AspNetCore.Authorization;
 using CinemaAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace CinemaAPI.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tiket>>> GetTikets()
         {
@@ -27,6 +29,7 @@ namespace CinemaAPI.Controllers
                 .ToListAsync();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Tiket>> GetTiket(int id)
         {
@@ -45,6 +48,7 @@ namespace CinemaAPI.Controllers
             return tiket;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Tiket>> PostTiket(Tiket tiket)
         {
@@ -61,6 +65,7 @@ namespace CinemaAPI.Controllers
             return CreatedAtAction(nameof(GetTiket), new { id = tiket.Id }, createdTiket);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTiket(int id, Tiket tiket)
         {
@@ -90,6 +95,7 @@ namespace CinemaAPI.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTiket(int id)
         {

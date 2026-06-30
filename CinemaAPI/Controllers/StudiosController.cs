@@ -1,5 +1,6 @@
 using CinemaAPI.Data;
 using CinemaAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +36,7 @@ namespace CinemaAPI.Controllers
             return studio;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudio(int id, Studio studio)
         {
@@ -64,6 +66,7 @@ namespace CinemaAPI.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Studio>> PostStudio(Studio studio)
         {
@@ -73,6 +76,7 @@ namespace CinemaAPI.Controllers
             return CreatedAtAction(nameof(GetStudio), new { id = studio.Id }, studio);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudio(int id)
         {

@@ -1,4 +1,5 @@
 using CinemaAPI.Data;
+using Microsoft.AspNetCore.Authorization;
 using CinemaAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,7 @@ namespace CinemaAPI.Controllers
             return jadwalFilm;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<JadwalFilm>> PostJadwalFilm(JadwalFilm jadwalFilm)
         {
@@ -50,6 +52,7 @@ namespace CinemaAPI.Controllers
             return CreatedAtAction(nameof(GetJadwalFilm), new { id = jadwalFilm.Id }, jadwalFilm);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutJadwalFilm(int id, JadwalFilm jadwalFilm)
         {
@@ -79,6 +82,7 @@ namespace CinemaAPI.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJadwalFilm(int id)
         {
