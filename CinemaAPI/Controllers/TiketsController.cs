@@ -58,15 +58,8 @@ namespace CinemaAPI.Controllers
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email) ?? string.Empty;
 
-            try
-            {
-                var createdTiket = await _tiketService.PesanTiketAsync(tiket, userEmail);
-                return CreatedAtAction(nameof(GetTiket), new { id = createdTiket.Id }, createdTiket);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var createdTiket = await _tiketService.PesanTiketAsync(tiket, userEmail);
+            return CreatedAtAction(nameof(GetTiket), new { id = createdTiket.Id }, createdTiket);
         }
 
         [Authorize(Roles = "Admin")]

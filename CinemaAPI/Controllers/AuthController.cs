@@ -17,15 +17,8 @@ namespace CinemaAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            try
-            {
-                var result = await _authService.LoginAsync(request.Email, request.Password);
-                return Ok(new { Token = result.Token, Role = result.Role });
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
+            var result = await _authService.LoginAsync(request.Email, request.Password);
+            return Ok(new { Token = result.Token, Role = result.Role });
         }
 
         [HttpPost("register")]
