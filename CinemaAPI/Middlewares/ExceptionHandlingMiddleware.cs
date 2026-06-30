@@ -42,7 +42,6 @@ namespace CinemaAPI.Middlewares
             {
                 StatusCode = context.Response.StatusCode,
                 Message = exception.Message,
-                Detail = "Ditangkap oleh Custom Middleware"
             };
 
             return context.Response.WriteAsync(JsonSerializer.Serialize(response));
