@@ -4,6 +4,7 @@ using CinemaAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using CinemaAPI.Services;
 
 namespace CinemaAPI.Controllers
 {
@@ -12,10 +13,12 @@ namespace CinemaAPI.Controllers
     public class TiketsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly ITiketService _tiketService;
 
-        public TiketsController(AppDbContext context)
+        public TiketsController(AppDbContext context, ITiketService tiketService)
         {
             _context = context;
+            _tiketService = tiketService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -53,33 +56,17 @@ namespace CinemaAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Tiket>> PostTiket(Tiket tiket)
         {
-            bool isSeatTaken = await _context.Tikets.AnyAsync(t => 
-                t.JadwalFilmId == tiket.JadwalFilmId && 
-                t.NomorKursi == tiket.NomorKursi && 
-                t.StatusTiket != "Dibatalkan");
+            var userEmail = User.FindFirstValue(ClaimTypes.Email) ?? string.Empty;
 
-            if (isSeatTaken)
+            try
             {
-                return BadRequest(new { message = $"Maaf, kursi {tiket.NomorKursi} sudah dipesan untuk jadwal ini." });
+                var createdTiket = await _tiketService.PesanTiketAsync(tiket, userEmail);
+                return CreatedAtAction(nameof(GetTiket), new { id = createdTiket.Id }, createdTiket);
             }
-
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            if (!string.IsNullOrEmpty(userEmail))
+            catch (InvalidOperationException ex)
             {
-                tiket.UserId = userEmail;
+                return BadRequest(new { message = ex.Message });
             }
-
-            _context.Tikets.Add(tiket);
-            await _context.SaveChangesAsync();
-
-            var createdTiket = await _context.Tikets
-                .Include(t => t.JadwalFilm)
-                .ThenInclude(j => j!.Film)
-                .Include(t => t.JadwalFilm)
-                .ThenInclude(j => j!.Studio)
-                .FirstOrDefaultAsync(t => t.Id == tiket.Id);
-
-            return CreatedAtAction(nameof(GetTiket), new { id = tiket.Id }, createdTiket);
         }
 
         [Authorize(Roles = "Admin")]
