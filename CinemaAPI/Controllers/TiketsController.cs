@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using CinemaAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace CinemaAPI.Controllers
 {
@@ -52,6 +53,22 @@ namespace CinemaAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Tiket>> PostTiket(Tiket tiket)
         {
+            bool isSeatTaken = await _context.Tikets.AnyAsync(t => 
+                t.JadwalFilmId == tiket.JadwalFilmId && 
+                t.NomorKursi == tiket.NomorKursi && 
+                t.StatusTiket != "Dibatalkan");
+
+            if (isSeatTaken)
+            {
+                return BadRequest(new { message = $"Maaf, kursi {tiket.NomorKursi} sudah dipesan untuk jadwal ini." });
+            }
+
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                tiket.UserId = userEmail;
+            }
+
             _context.Tikets.Add(tiket);
             await _context.SaveChangesAsync();
 

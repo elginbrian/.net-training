@@ -25,7 +25,6 @@ namespace CinemaAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            // 1. Cari user di database berdasarkan email
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
             if (user == null)
@@ -33,7 +32,6 @@ namespace CinemaAPI.Controllers
                 return Unauthorized("Email tidak ditemukan.");
             }
 
-            // 2. Verifikasi password (Dukung hash BCrypt maupun teks biasa untuk data awal)
             bool isPasswordValid = false;
             if (user.PasswordHash.StartsWith("$2a$") || user.PasswordHash.StartsWith("$2b$") || user.PasswordHash.StartsWith("$2y$"))
             {
@@ -49,7 +47,6 @@ namespace CinemaAPI.Controllers
                 return Unauthorized("Password salah.");
             }
 
-            // 3. Jika cocok, buatkan Token
             var token = GenerateJwtToken(user.Email, user.Role);
             return Ok(new { Token = token, Role = user.Role });
         }
