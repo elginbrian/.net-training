@@ -159,3 +159,5 @@ D:\.NET_Training\CinemaAPI\obj\Debug\net10.0\CinemaAPI.genruntimeconfig.cache
 D:\.NET_Training\CinemaAPI\obj\Debug\net10.0\ref\CinemaAPI.dll
 D:\.NET_Training\CinemaAPI\bin\Debug\net10.0\dotnet-tools.json
 D:\.NET_Training\CinemaAPI\bin\Debug\net10.0\Scalar.AspNetCore.dll
+D:\.NET_Training\CinemaAPI\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\.NET_Training\CinemaAPI\bin\Debug\net10.0\BCrypt-Net-Next.dll

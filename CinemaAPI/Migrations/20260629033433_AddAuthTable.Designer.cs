@@ -4,6 +4,7 @@ using CinemaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260629033433_AddAuthTable")]
+    partial class AddAuthTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,10 +245,6 @@ namespace CinemaAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -266,16 +265,14 @@ namespace CinemaAPI.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "admin@cinema.com",
-                            PasswordHash = "admin123",
+                            PasswordHash = "$2a$11$DM7r0nArnnEchtfbW5e5IO6MvWVa6Wo8Rp5HuSqCkxa2GU8pVc.fe",
                             Role = "Admin",
                             Username = "admin"
                         },
                         new
                         {
                             Id = 2,
-                            Email = "user@cinema.com",
-                            PasswordHash = "user123",
+                            PasswordHash = "$2a$11$JJrIK2Rmngjnc8669GHfVek0wozZFeGV5ymlm1dnxWSW.hQCFqKee",
                             Role = "User",
                             Username = "user"
                         });
